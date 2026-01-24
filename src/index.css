@@ -1,69 +1,57 @@
 @import "tailwindcss";
 
-/* --- NOS ANIMATIONS PERSO (Gardes-les en dessous) --- */
+/* --- 1. CONFIGURATION DES ANIMATIONS (Tailwind v4) --- */
 @theme {
   --animate-float: float 3s ease-in-out infinite;
   --animate-pop: popIn 0.4s ease-out;
   --animate-slide-up: slideUp 0.5s ease-out;
+  --animate-spin-slow: spin-slow 20s linear infinite;
 }
 
-@keyframes float { 
-  0%, 100% { transform: translateY(0px); } 
-  50% { transform: translateY(-10px); } 
-}
-
-@keyframes popIn { 
-  0% { transform: scale(0.8); opacity: 0; } 
-  100% { transform: scale(1); opacity: 1; } 
-}
-
-@keyframes slideUp { 
-  0% { transform: translateY(50px); opacity: 0; } 
-  100% { transform: translateY(0); opacity: 1; } 
-}
-
-/* Fond global */
-body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: #2d3748;
-  font-family: system-ui, -apple-system, sans-serif;
-}
-
-/* --- NOS ANIMATIONS PERSO --- */
+/* --- 2. UTILITAIRES PERSONNALISÉS --- */
 @layer utilities {
-  .animate-float { animation: float 3s ease-in-out infinite; }
-  .animate-pop { animation: popIn 0.4s ease-out; }
-  .animate-slide-up { animation: slideUp 0.5s ease-out; }
-}
-
-@keyframes float { 
-  0%, 100% { transform: translateY(0px); } 
-  50% { transform: translateY(-10px); } 
-}
-
-@keyframes popIn { 
-  0% { transform: scale(0.8); opacity: 0; } 
-  100% { transform: scale(1); opacity: 1; } 
-}
-
-@keyframes slideUp { 
-  0% { transform: translateY(50px); opacity: 0; } 
-  100% { transform: translateY(0); opacity: 1; } 
-}
-
-/* Fond global "Explosif" */
-body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: #2d3748;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* --- UTITAIRES 3D (Flip Card) --- */
-@layer utilities {
+  /* 3D */
   .perspective-1000 { perspective: 1000px; }
   .transform-style-3d { transform-style: preserve-3d; }
   .backface-hidden { backface-visibility: hidden; }
   .rotate-y-180 { transform: rotateY(180deg); }
+
+  /* Shine Effect */
+  .group-hover\:animate-shine:hover {
+    animation: shine 1s;
+  }
+}
+
+/* --- 3. KEYFRAMES UNIQUES --- */
+@keyframes float { 
+  0%, 100% { transform: translateY(0px); } 
+  50% { transform: translateY(-10px); } 
+}
+
+@keyframes popIn { 
+  0% { transform: scale(0.8); opacity: 0; } 
+  100% { transform: scale(1); opacity: 1; } 
+}
+
+@keyframes slideUp { 
+  0% { transform: translateY(50px); opacity: 0; } 
+  100% { transform: translateY(0); opacity: 1; } 
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shine {
+  100% { left: 125%; }
+}
+
+/* --- 4. STYLE GLOBAL --- */
+body {
+  /* Couleur de repli sombre (le BackgroundWrapper gère le visuel) */
+  background-color: #0f172a;
+  min-height: 100vh;
+  color: #e2e8f0; /* Texte clair par défaut */
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
